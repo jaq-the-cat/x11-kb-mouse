@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define MOVE 10
+#define MOVE 5
 
 #define REVERSE_BITS(b) ({\
     char reverse_num = 0;\
@@ -72,13 +72,13 @@ int main(){
         if ((keys_return[14] & RIGHT) == RIGHT)
             move_mouse(display, MOVE, 0);
         if ((keys_return[7] & SHIFT) == SHIFT)
-            left = 1;
-        else
-            left = 0;
-        if ((keys_return[13] & CTRL) == CTRL)
             right = 1;
         else
             right = 0;
+        if ((keys_return[13] & CTRL) == CTRL)
+            left = 1;
+        else
+            left = 0;
 
         if (left)
             do_btn(display, Button1);
