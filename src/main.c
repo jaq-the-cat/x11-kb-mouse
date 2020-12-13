@@ -47,9 +47,11 @@ void print_bits(char b) {
 }
 
 int main(){
-    const char SHIFT = REVERSE_BITS(0x02); // 7
+    const char RSHIFT = REVERSE_BITS(0x02); // 7
+    const char RCTRL = REVERSE_BITS(0x40); //13
+    const char R_CHAR = REVERSE_BITS(0x10); // 3
+    const char F_CHAR = REVERSE_BITS(0x40); // 5
     const char UP = REVERSE_BITS(0x01); // 13
-    const char CTRL = REVERSE_BITS(0x40); //13
     const char LEFT = REVERSE_BITS(0x40); // 14
     const char DOWN = REVERSE_BITS(0x08); // 14
     const char RIGHT = REVERSE_BITS(0x20); // 14
@@ -61,7 +63,6 @@ int main(){
     char keys_return[32];
 
     while (1) {
-        printf("\e[1;1H\e[2J");
         XQueryKeymap(display, keys_return);
         if ((keys_return[13] & UP) == UP)
             move_mouse(display, 0, -MOVE);
@@ -71,11 +72,11 @@ int main(){
             move_mouse(display, 0, MOVE);
         if ((keys_return[14] & RIGHT) == RIGHT)
             move_mouse(display, MOVE, 0);
-        if ((keys_return[7] & SHIFT) == SHIFT)
+        if ((keys_return[5] & F_CHAR) == F_CHAR)
             right = 1;
         else
             right = 0;
-        if ((keys_return[13] & CTRL) == CTRL)
+        if ((keys_return[3] & R_CHAR) == R_CHAR)
             left = 1;
         else
             left = 0;
