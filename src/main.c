@@ -29,15 +29,21 @@ void set_mouse(Display *display, int x, int y) {
     XFlush(display);
 }
 
-void do_control(Display *display) {
-    XTestFakeKeyEvent(display, XK_Control_R, 1, 0);
-    XTestFakeKeyEvent(display, XK_Control_R, 0, 0);
+void do_lmb(Display *display) {
+    XTestFakeButtonEvent(display, 1, 1, 0);
+    XTestFakeButtonEvent(display, 1, 1, 0);
     XFlush(display);
 }
 
-void do_shift(Display *display) {
-    XTestFakeKeyEvent(display, XK_Shift_R, 1, 0);
-    XTestFakeKeyEvent(display, XK_Shift_R, 0, 0);
+void do_rmb(Display *display) {
+    XTestFakeButtonEvent(display, 2, 1, 0);
+    XTestFakeButtonEvent(display, 2, 1, 0);
+    XFlush(display);
+}
+
+void do_mmb(Display *display) {
+    XTestFakeButtonEvent(display, 3, 1, 0);
+    XTestFakeButtonEvent(display, 3, 1, 0);
     XFlush(display);
 }
 
@@ -62,11 +68,6 @@ int main(){
     while (1) {
         printf("\e[1;1H\e[2J");
         XQueryKeymap(display, keys_return);
-        for (int i=0; i<32; i++) {
-            print_bits(keys_return[i]);
-            printf(" <- %d", i);
-            printf("\n");
-        }
         if ((keys_return[13] & UP) == UP)
             move_mouse(display, 0, -MOVE);
         if ((keys_return[14] & LEFT) == LEFT)
@@ -76,9 +77,9 @@ int main(){
         if ((keys_return[14] & RIGHT) == RIGHT)
             move_mouse(display, MOVE, 0);
         if ((keys_return[7] & SHIFT) == SHIFT)
-            do_control(display);
+            do_lmb(display);
         if ((keys_return[13] & CTRL) == CTRL)
-            do_shift(display);
+            do_rmb(display);
         printf("\n");
         usleep(10000);
     }
