@@ -36,14 +36,14 @@ void do_lmb(Display *display) {
     XFlush(display);
 }
 
-void do_rmb(Display *display) {
+void do_mmb(Display *display) {
     XTestFakeButtonEvent(display, Button2, 1, 0);
     usleep(1);
     XTestFakeButtonEvent(display, Button2, 0, 0);
     XFlush(display);
 }
 
-void do_mmb(Display *display) {
+void do_rmb(Display *display) {
     XTestFakeButtonEvent(display, Button3, 1, 0);
     usleep(1);
     XTestFakeButtonEvent(display, Button3, 0, 0);
