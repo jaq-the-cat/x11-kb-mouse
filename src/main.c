@@ -37,7 +37,7 @@ void print_bits(char b) {
 
 int main(){
     // UP: row 13
-     char UP = REVERSE_BITS(0x01);
+    const char UP = REVERSE_BITS(0x01);
     // rest: row 14
     const char LEFT = REVERSE_BITS(0x40);
     const char DOWN = REVERSE_BITS(0x08);
@@ -49,18 +49,6 @@ int main(){
     while (1) {
         printf("\e[1;1H\e[2J");
         XQueryKeymap(display, keys_return);
-        print_bits(keys_return[13]);
-        printf("\n");
-        print_bits(UP);
-        printf("\n");
-        printf("\n");
-        print_bits(keys_return[14]);
-        printf("\n");
-        print_bits(LEFT);
-        printf("\n");
-        print_bits(DOWN);
-        printf("\n");
-        print_bits(RIGHT);
         if ((keys_return[13] & UP) == UP)
             printf("UP ");
         if ((keys_return[14] & LEFT) == LEFT)
