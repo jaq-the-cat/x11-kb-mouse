@@ -36,12 +36,10 @@ void print_bits(char b) {
 }
 
 int main(){
-    // UP: row 13
-    const char UP = REVERSE_BITS(0x01);
-    // rest: row 14
-    const char LEFT = REVERSE_BITS(0x40);
-    const char DOWN = REVERSE_BITS(0x08);
-    const char RIGHT = REVERSE_BITS(0x20);
+    const char UP = REVERSE_BITS(0x01); // 13
+    const char LEFT = REVERSE_BITS(0x40); // 14
+    const char DOWN = REVERSE_BITS(0x08); // 14
+    const char RIGHT = REVERSE_BITS(0x20); // 14
 
     Display *display = XOpenDisplay(NULL);
     char keys_return[32];
