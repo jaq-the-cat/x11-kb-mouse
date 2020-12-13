@@ -1,0 +1,6 @@
+-SOURCE
+src/main.c
+
+-LIBS
+X11
+Xtst
