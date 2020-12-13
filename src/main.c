@@ -1,6 +1,6 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
-#include <X11/keysymdef.h>
+#include <X11/keysym.h>
 #include <unistd.h>
 #include <stdio.h>
 
@@ -26,6 +26,18 @@ void move_mouse(Display *display, int x, int y) {
 
 void set_mouse(Display *display, int x, int y) {
     XTestFakeMotionEvent(display, 0, x, y, 0);
+    XFlush(display);
+}
+
+void do_control(Display *display) {
+    XTestFakeKeyEvent(display, XK_Control_R, 1, 0);
+    XTestFakeKeyEvent(display, XK_Control_R, 0, 0);
+    XFlush(display);
+}
+
+void do_shift(Display *display) {
+    XTestFakeKeyEvent(display, XK_Shift_R, 1, 0);
+    XTestFakeKeyEvent(display, XK_Shift_R, 0, 0);
     XFlush(display);
 }
 
@@ -64,9 +76,9 @@ int main(){
         if ((keys_return[14] & RIGHT) == RIGHT)
             move_mouse(display, MOVE, 0);
         if ((keys_return[7] & SHIFT) == SHIFT)
-            // simulate right click
+            do_control(display);
         if ((keys_return[13] & CTRL) == CTRL)
-            // simulate left click
+            do_shift(display);
         printf("\n");
         usleep(10000);
     }
