@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define MOVE 5
+#define MOVE 3
 
 #define REVERSE_BITS(b) ({\
     char reverse_num = 0;\
