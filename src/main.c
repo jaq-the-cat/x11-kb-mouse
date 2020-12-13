@@ -1,5 +1,8 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
+#include <unistd.h>
+
+#define MOVE 5
 
 void move_mouse(Display *display, int x, int y) {
     XTestFakeRelativeMotionEvent(display, x, y, 0);
@@ -24,7 +27,10 @@ void button_break(Display *display, unsigned int button) {
 
 int main(){
     Display *display = XOpenDisplay(NULL);
-    move_mouse(display, 5, 5);
+    for (int i=0; i<MOVE; i++) {
+        move_mouse(display, i, 0);
+        usleep(15000);
+    }
     button_make(display, 1);
     button_break(display, 1);
     return 0;
