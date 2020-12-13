@@ -48,13 +48,13 @@ int main(){
         printf("\e[1;1H\e[2J");
         XQueryKeymap(display, keys_return);
         if ((keys_return[13] & UP) == UP)
-            printf("UP ");
+            move_mouse(display, 0, -MOVE);
         if ((keys_return[14] & LEFT) == LEFT)
-            printf("LEFT ");
+            move_mouse(display, -MOVE, 0);
         if ((keys_return[14] & DOWN) == DOWN)
-            printf("DOWN ");
+            move_mouse(display, 0, MOVE);
         if ((keys_return[14] & RIGHT) == RIGHT)
-            printf("RIGHT ");
+            move_mouse(display, MOVE, 0);
         printf("\n");
         usleep(10000);
     }
