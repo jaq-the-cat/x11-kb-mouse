@@ -30,20 +30,23 @@ void set_mouse(Display *display, int x, int y) {
 }
 
 void do_lmb(Display *display) {
-    XTestFakeButtonEvent(display, 1, 1, 0);
-    XTestFakeButtonEvent(display, 1, 1, 0);
+    XTestFakeButtonEvent(display, Button1, 1, 0);
+    usleep(1);
+    XTestFakeButtonEvent(display, Button1, 0, 0);
     XFlush(display);
 }
 
 void do_rmb(Display *display) {
-    XTestFakeButtonEvent(display, 2, 1, 0);
-    XTestFakeButtonEvent(display, 2, 1, 0);
+    XTestFakeButtonEvent(display, Button2, 1, 0);
+    usleep(1);
+    XTestFakeButtonEvent(display, Button2, 0, 0);
     XFlush(display);
 }
 
 void do_mmb(Display *display) {
-    XTestFakeButtonEvent(display, 3, 1, 0);
-    XTestFakeButtonEvent(display, 3, 1, 0);
+    XTestFakeButtonEvent(display, Button3, 1, 0);
+    usleep(1);
+    XTestFakeButtonEvent(display, Button3, 0, 0);
     XFlush(display);
 }
 
