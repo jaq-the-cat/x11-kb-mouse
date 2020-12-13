@@ -1,5 +1,6 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
+#include <X11/keysymdef.h>
 #include <unistd.h>
 #include <stdio.h>
 
@@ -36,7 +37,9 @@ void print_bits(char b) {
 }
 
 int main(){
+    const char SHIFT = REVERSE_BITS(0x02); // 7
     const char UP = REVERSE_BITS(0x01); // 13
+    const char CTRL = REVERSE_BITS(0x40); //13
     const char LEFT = REVERSE_BITS(0x40); // 14
     const char DOWN = REVERSE_BITS(0x08); // 14
     const char RIGHT = REVERSE_BITS(0x20); // 14
@@ -47,6 +50,11 @@ int main(){
     while (1) {
         printf("\e[1;1H\e[2J");
         XQueryKeymap(display, keys_return);
+        for (int i=0; i<32; i++) {
+            print_bits(keys_return[i]);
+            printf(" <- %d", i);
+            printf("\n");
+        }
         if ((keys_return[13] & UP) == UP)
             move_mouse(display, 0, -MOVE);
         if ((keys_return[14] & LEFT) == LEFT)
@@ -55,6 +63,10 @@ int main(){
             move_mouse(display, 0, MOVE);
         if ((keys_return[14] & RIGHT) == RIGHT)
             move_mouse(display, MOVE, 0);
+        if ((keys_return[7] & SHIFT) == SHIFT)
+            // simulate right click
+        if ((keys_return[13] & CTRL) == CTRL)
+            // simulate left click
         printf("\n");
         usleep(10000);
     }
