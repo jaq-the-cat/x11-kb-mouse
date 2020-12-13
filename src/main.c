@@ -29,24 +29,13 @@ void set_mouse(Display *display, int x, int y) {
     XFlush(display);
 }
 
-void do_lmb(Display *display) {
-    XTestFakeButtonEvent(display, Button1, 1, 0);
-    usleep(1);
-    XTestFakeButtonEvent(display, Button1, 0, 0);
+void do_btn(Display *display, int button) {
+    XTestFakeButtonEvent(display, button, 1, 0);
     XFlush(display);
 }
 
-void do_mmb(Display *display) {
-    XTestFakeButtonEvent(display, Button2, 1, 0);
-    usleep(1);
-    XTestFakeButtonEvent(display, Button2, 0, 0);
-    XFlush(display);
-}
-
-void do_rmb(Display *display) {
-    XTestFakeButtonEvent(display, Button3, 1, 0);
-    usleep(1);
-    XTestFakeButtonEvent(display, Button3, 0, 0);
+void undo_btn(Display *display, int button) {
+    XTestFakeButtonEvent(display, button, 0, 0);
     XFlush(display);
 }
 
@@ -65,6 +54,9 @@ int main(){
     const char DOWN = REVERSE_BITS(0x08); // 14
     const char RIGHT = REVERSE_BITS(0x20); // 14
 
+    int left = 0;
+    int right = 0;
+
     Display *display = XOpenDisplay(NULL);
     char keys_return[32];
 
@@ -80,11 +72,23 @@ int main(){
         if ((keys_return[14] & RIGHT) == RIGHT)
             move_mouse(display, MOVE, 0);
         if ((keys_return[7] & SHIFT) == SHIFT)
-            do_lmb(display);
+            left = 1;
+        else
+            left = 0;
         if ((keys_return[13] & CTRL) == CTRL)
-            do_rmb(display);
-        printf("\n");
-        usleep(10000);
+            right = 1;
+        else
+            right = 0;
+
+        if (left)
+            do_btn(display, Button1);
+        else
+            undo_btn(display, Button1);
+        if (right)
+            do_btn(display, Button3);
+        else
+            undo_btn(display, Button3);
+        usleep(5000);
     }
     return 0;
 }
