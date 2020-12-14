@@ -1,10 +1,12 @@
-#include <X11/Xlib.h>
-#include <X11/extensions/XTest.h>
-#include <X11/keysym.h>
-#include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
+
+#include <X11/Xlib.h>
+#include <X11/extensions/XTest.h>
+#include <X11/keysym.h>
+
+#include <unistd.h>
 
 #define MOVE 3
 #define REVERSE_BITS(b) ({\
