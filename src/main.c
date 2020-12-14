@@ -2,7 +2,9 @@
 #include <X11/extensions/XTest.h>
 #include <X11/keysym.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <stdio.h>
+#include <signal.h>
 
 #define MOVE 3
 
@@ -54,7 +56,15 @@ void print_stuff(char keys_return[32]) {
     }
 }
 
-int main(){
+void handler(int s) {
+    printf("Caught signal %d\n", s);
+    exit(1);
+}
+
+int main() {
+
+    struct sigaction shandler;
+
     const char R_CHAR = REVERSE_BITS(0x10); // 3
     const char F_CHAR = REVERSE_BITS(0x40); // 5
     int left = 0;
@@ -115,6 +125,7 @@ int main(){
             undo_btn(display, Button3);
         usleep(5000);
     }
+    XCloseDisplay(display);
     return 0;
 }
 
