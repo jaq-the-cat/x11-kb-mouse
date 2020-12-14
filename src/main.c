@@ -78,6 +78,11 @@ int main() {
     int was_scroll_up = 0;
     int was_scroll_down = 0;
 
+    const int RIGHT_CLICK = XK_F;
+    const int LEFT_CLICK = XK_C;
+    const int SCROLL_UP = XK_C;
+    const int SCROLL_DOWN = XK_F;
+
     display = XOpenDisplay(NULL);
     char keys_return[32];
 
@@ -92,7 +97,7 @@ int main() {
         if (key_is_pressed(XK_Right))
             move_mouse(display, MOVE, 0);
 
-        if (key_is_pressed(XK_C)) {
+        if (key_is_pressed(SCROLL_UP)) {
             if (!was_scroll_up) {
                 was_scroll_up = 1;
                 do_btn(display, Button4);
@@ -101,7 +106,7 @@ int main() {
             was_scroll_up = 0;
             undo_btn(display, Button4);
         }
-        if (key_is_pressed(XK_V)) {
+        if (key_is_pressed(SCROLL_DOWN)) {
             if (!was_scroll_down) {
                 was_scroll_down = 1;
                 do_btn(display, Button5);
@@ -111,14 +116,14 @@ int main() {
             undo_btn(display, Button5);
         }
 
-        if (key_is_pressed(XK_F))
-            right = 1;
-        else
-            right = 0;
-        if (key_is_pressed(XK_R))
+        if (key_is_pressed(LEFT_CLICK))
             left = 1;
         else
             left = 0;
+        if (key_is_pressed(RIGHT_CLICK))
+            right = 1;
+        else
+            right = 0;
 
         if (left)
             do_btn(display, Button1);
