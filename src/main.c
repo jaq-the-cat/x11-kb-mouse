@@ -1,10 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
-
-#include <X11/Xlib.h>
-#include <X11/extensions/XTest.h>
-#include <X11/keysym.h>
+#include "x.h"
 
 #include <unistd.h>
 
@@ -12,51 +9,9 @@
 
 Display *display;
 
-void move_mouse(Display *display, int x, int y) {
-    XTestFakeRelativeMotionEvent(display, x, y, 0);
-    XFlush(display);
-}
-
-void set_mouse(Display *display, int x, int y) {
-    XTestFakeMotionEvent(display, 0, x, y, 0);
-    XFlush(display);
-}
-
-void do_btn(Display *display, int button) {
-    XTestFakeButtonEvent(display, button, 1, 0);
-    XFlush(display);
-}
-
-void undo_btn(Display *display, int button) {
-    XTestFakeButtonEvent(display, button, 0, 0);
-    XFlush(display);
-}
-
-void print_bits(char b) {
-    for (int bit=0; bit<8; bit++) {
-        printf("%i ", b & 0x01);
-        b >>= 1;
-    }
-}
-
-void print_stuff(char keys_return[32]) {
-    printf("\e[1;1H\e[2J"); // clear screen
-    for (int i=0; i<32; i++) {
-        print_bits(keys_return[i]);
-        printf(" | %d\n", i);
-    }
-}
-
 void control_c_handler(int s) {
     XCloseDisplay(display);
     exit(1);
-}
-
-int key_is_pressed(KeySym ks) {
-    char keys_return[32];
-    XQueryKeymap(display, keys_return);
-    KeyCode kc2 = XKeysymToKeycode(display, ks);
-    return !!(keys_return[kc2 >> 3] & (1 << (kc2 & 7)));
 }
 
 int main() {
