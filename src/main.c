@@ -72,7 +72,6 @@ int key_is_pressed(KeySym ks) {
 }
 
 int main() {
-
     signal(SIGINT, control_c_handler);
 
     int left = 0;
@@ -99,24 +98,24 @@ int main() {
         if (key_is_pressed(XK_Right))
             move_mouse(display, MOVE, 0);
 
-        if (key_is_pressed(SCROLL_UP)) {
-            if (!was_scroll_up) {
-                was_scroll_up = 1;
-                do_btn(display, Button4);
-            }
-        } else {
-            was_scroll_up = 0;
-            undo_btn(display, Button4);
-        }
-        if (key_is_pressed(SCROLL_DOWN)) {
-            if (!was_scroll_down) {
-                was_scroll_down = 1;
-                do_btn(display, Button5);
-            }
-        } else {
-            was_scroll_down = 0;
-            undo_btn(display, Button5);
-        }
+        /*if (key_is_pressed(SCROLL_UP)) {*/
+            /*if (!was_scroll_up) {*/
+                /*was_scroll_up = 1;*/
+                /*do_btn(display, Button4);*/
+            /*}*/
+        /*} else {*/
+            /*was_scroll_up = 0;*/
+            /*undo_btn(display, Button4);*/
+        /*}*/
+        /*if (key_is_pressed(SCROLL_DOWN)) {*/
+            /*if (!was_scroll_down) {*/
+                /*was_scroll_down = 1;*/
+                /*do_btn(display, Button5);*/
+            /*}*/
+        /*} else {*/
+            /*was_scroll_down = 0;*/
+            /*undo_btn(display, Button5);*/
+        /*}*/
 
         if (key_is_pressed(LEFT_CLICK))
             left = 1;
@@ -137,6 +136,7 @@ int main() {
             undo_btn(display, Button3);
         usleep(5000);
     }
+    end:
     return 0;
 }
 
