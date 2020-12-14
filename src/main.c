@@ -7,6 +7,11 @@
 
 #define POINTER_SPEED 3
 
+#define LEFT_CLICK XK_KP_7
+#define RIGHT_CLICK XK_KP_9
+#define SCROLL_UP XK_KP_1
+#define SCROLL_DOWN XK_KP_3
+
 Display *display;
 
 void control_c_handler(int s) {
@@ -21,11 +26,6 @@ int main() {
     int right = 0;
     int was_scroll_up = 0;
     int was_scroll_down = 0;
-
-    const int LEFT_CLICK = XK_KP_7;
-    const int RIGHT_CLICK = XK_KP_9;
-    const int SCROLL_UP = XK_KP_1;
-    const int SCROLL_DOWN = XK_KP_3;
 
     display = XOpenDisplay(NULL);
     char keys_return[32];
