@@ -8,19 +8,7 @@
 
 #include <unistd.h>
 
-#define MOVE 3
-#define REVERSE_BITS(b) ({\
-    char reverse_num = 0;\
-    do {\
-    unsigned int bit_num = 8;\
-    char i, temp;\
-    for (i = 0; i < bit_num; i++) {\
-        temp = (b & (1 << i));\
-        if (temp)\
-            reverse_num |= (1 << ((bit_num - 1) - i));\
-    }} while (0);\
-    reverse_num;\
-})
+#define POINTER_SPEED 3
 
 Display *display;
 
@@ -71,10 +59,6 @@ int key_is_pressed(KeySym ks) {
     return !!(keys_return[kc2 >> 3] & (1 << (kc2 & 7)));
 }
 
-void handle_keys() {
-
-}
-
 int main() {
     signal(SIGINT, control_c_handler);
 
@@ -94,13 +78,13 @@ int main() {
     while (1) {
         XQueryKeymap(display, keys_return);
         if (key_is_pressed(XK_KP_8))
-            move_mouse(display, 0, -MOVE);
+            move_mouse(display, 0, -POINTER_SPEED);
         if (key_is_pressed(XK_KP_4))
-            move_mouse(display, -MOVE, 0);
+            move_mouse(display, -POINTER_SPEED, 0);
         if (key_is_pressed(XK_KP_5))
-            move_mouse(display, 0, MOVE);
+            move_mouse(display, 0, POINTER_SPEED);
         if (key_is_pressed(XK_KP_6))
-            move_mouse(display, MOVE, 0);
+            move_mouse(display, POINTER_SPEED, 0);
 
         /*if (key_is_pressed(SCROLL_UP)) {*/
             /*if (!was_scroll_up) {*/
