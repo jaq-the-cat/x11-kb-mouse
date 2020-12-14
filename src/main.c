@@ -19,13 +19,13 @@ int main() {
 
     int left = 0;
     int right = 0;
-    /*int was_scroll_up = 0;*/
-    /*int was_scroll_down = 0;*/
+    int was_scroll_up = 0;
+    int was_scroll_down = 0;
 
     const int LEFT_CLICK = XK_KP_7;
     const int RIGHT_CLICK = XK_KP_9;
-    /*const int SCROLL_UP = XK_C;*/
-    /*const int SCROLL_DOWN = XK_F;*/
+    const int SCROLL_UP = XK_KP_1;
+    const int SCROLL_DOWN = XK_KP_3;
 
     display = XOpenDisplay(NULL);
     char keys_return[32];
@@ -41,24 +41,24 @@ int main() {
         if (key_is_pressed(XK_KP_6))
             move_mouse(display, POINTER_SPEED, 0);
 
-        /*if (key_is_pressed(SCROLL_UP)) {*/
-            /*if (!was_scroll_up) {*/
-                /*was_scroll_up = 1;*/
-                /*do_btn(display, Button4);*/
-            /*}*/
-        /*} else {*/
-            /*was_scroll_up = 0;*/
-            /*undo_btn(display, Button4);*/
-        /*}*/
-        /*if (key_is_pressed(SCROLL_DOWN)) {*/
-            /*if (!was_scroll_down) {*/
-                /*was_scroll_down = 1;*/
-                /*do_btn(display, Button5);*/
-            /*}*/
-        /*} else {*/
-            /*was_scroll_down = 0;*/
-            /*undo_btn(display, Button5);*/
-        /*}*/
+        if (key_is_pressed(SCROLL_UP)) {
+            if (!was_scroll_up) {
+                was_scroll_up = 1;
+                do_btn(display, Button4);
+            }
+        } else {
+            was_scroll_up = 0;
+            undo_btn(display, Button4);
+        }
+        if (key_is_pressed(SCROLL_DOWN)) {
+            if (!was_scroll_down) {
+                was_scroll_down = 1;
+                do_btn(display, Button5);
+            }
+        } else {
+            was_scroll_down = 0;
+            undo_btn(display, Button5);
+        }
 
         if (key_is_pressed(LEFT_CLICK))
             left = 1;
