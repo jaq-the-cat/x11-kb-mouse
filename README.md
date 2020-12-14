@@ -4,7 +4,7 @@ X11 program that moves the mouse pointer with configurable keys
 
 Also able to simulate Left/Right/Scroll up/Scroll down mouse clicks
 
-To compile, simply run `gcc src/main.c -lX11 -lXtst`
+To compile, simply run `gcc src/main.c src/x.c -lX11 -lXtst`
 
 To run, execute the output binary (a.out if you ran the command above) in a terminal
 
