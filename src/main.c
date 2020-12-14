@@ -7,7 +7,6 @@
 #include <signal.h>
 
 #define MOVE 3
-
 #define REVERSE_BITS(b) ({\
     char reverse_num = 0;\
     do {\
@@ -20,6 +19,8 @@
     }} while (0);\
     reverse_num;\
 })
+
+Display *display;
 
 void move_mouse(Display *display, int x, int y) {
     XTestFakeRelativeMotionEvent(display, x, y, 0);
@@ -57,7 +58,7 @@ void print_stuff(char keys_return[32]) {
 }
 
 void control_c_handler(int s) {
-    printf("Caught signal %d\n", s);
+    XCloseDisplay(display);
     exit(1);
 }
 
@@ -80,7 +81,7 @@ int main() {
     const char DOWN = REVERSE_BITS(0x08); // 14
     const char RIGHT = REVERSE_BITS(0x20); // 14
 
-    Display *display = XOpenDisplay(NULL);
+    display = XOpenDisplay(NULL);
     char keys_return[32];
 
     while (1) {
@@ -125,7 +126,6 @@ int main() {
             undo_btn(display, Button3);
         usleep(5000);
     }
-    XCloseDisplay(display);
     return 0;
 }
 
