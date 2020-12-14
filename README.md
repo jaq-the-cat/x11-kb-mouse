@@ -1,6 +1,6 @@
 # X11 Keyboard-based Mouse
 
-X11 program that moves the mouse pointer with configurable keys
+X11 program that moves the mouse pointer with configurable keys (src/conf.h)
 
 Also able to simulate Left/Right/Scroll up/Scroll down mouse clicks
 
