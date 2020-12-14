@@ -67,11 +67,13 @@ int main() {
     signal(SIGINT, control_c_handler);
 
     const char R_CHAR = REVERSE_BITS(0x10); // 3
-    const char F_CHAR = REVERSE_BITS(0x40); // 5
     int left = 0;
+    const char F_CHAR = REVERSE_BITS(0x40); // 5
     int right = 0;
     const char C_CHAR = REVERSE_BITS(0x02); // 6
+    int was_c = 0;
     const char V_CHAR = REVERSE_BITS(0x01); // 6
+    int was_v = 0;
 
     const char RSHIFT = REVERSE_BITS(0x02); // 7
     const char RCTRL = REVERSE_BITS(0x40); //13
@@ -96,13 +98,21 @@ int main() {
             move_mouse(display, MOVE, 0);
 
         if ((keys_return[6] & C_CHAR) == C_CHAR) {
-            do_btn(display, Button4);
-            usleep(1);
+            if (!was_c) {
+                was_c = 1;
+                do_btn(display, Button4);
+            }
+        } else {
+            was_c = 0;
             undo_btn(display, Button4);
         }
-        if ((keys_return[6] & V_CHAR) == C_CHAR) {
-            do_btn(display, Button5);
-            usleep(1);
+        if ((keys_return[6] & V_CHAR) == V_CHAR) {
+            if (!was_v) {
+                was_v = 1;
+                do_btn(display, Button5);
+            }
+        } else {
+            was_v = 0;
             undo_btn(display, Button5);
         }
 
