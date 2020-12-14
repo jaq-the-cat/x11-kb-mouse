@@ -56,14 +56,14 @@ void print_stuff(char keys_return[32]) {
     }
 }
 
-void handler(int s) {
+void control_c_handler(int s) {
     printf("Caught signal %d\n", s);
     exit(1);
 }
 
 int main() {
 
-    struct sigaction shandler;
+    signal(SIGINT, control_c_handler);
 
     const char R_CHAR = REVERSE_BITS(0x10); // 3
     const char F_CHAR = REVERSE_BITS(0x40); // 5
