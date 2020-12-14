@@ -71,6 +71,10 @@ int key_is_pressed(KeySym ks) {
     return !!(keys_return[kc2 >> 3] & (1 << (kc2 & 7)));
 }
 
+void handle_keys() {
+
+}
+
 int main() {
     signal(SIGINT, control_c_handler);
 
@@ -79,8 +83,8 @@ int main() {
     int was_scroll_up = 0;
     int was_scroll_down = 0;
 
-    const int RIGHT_CLICK = XK_F;
-    const int LEFT_CLICK = XK_C;
+    const int LEFT_CLICK = XK_Q;
+    const int RIGHT_CLICK = XK_E;
     const int SCROLL_UP = XK_C;
     const int SCROLL_DOWN = XK_F;
 
