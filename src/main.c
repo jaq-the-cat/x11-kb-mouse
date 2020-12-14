@@ -86,7 +86,6 @@ int main() {
 
     while (1) {
         XQueryKeymap(display, keys_return);
-        print_stuff(keys_return);
         if ((keys_return[13] & UP) == UP)
             move_mouse(display, 0, -MOVE);
         if ((keys_return[14] & LEFT) == LEFT)
