@@ -133,7 +133,7 @@ int main() {
             do_btn(display, Button3);
         else
             undo_btn(display, Button3);
-        usleep(5000);
+        usleep(500);
     }
     return 0;
 }
