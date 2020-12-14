@@ -83,8 +83,8 @@ int main() {
     /*int was_scroll_up = 0;*/
     /*int was_scroll_down = 0;*/
 
-    const int LEFT_CLICK = XK_Q;
-    const int RIGHT_CLICK = XK_E;
+    const int LEFT_CLICK = XK_KP_7;
+    const int RIGHT_CLICK = XK_KP_9;
     /*const int SCROLL_UP = XK_C;*/
     /*const int SCROLL_DOWN = XK_F;*/
 
@@ -93,13 +93,13 @@ int main() {
 
     while (1) {
         XQueryKeymap(display, keys_return);
-        if (key_is_pressed(XK_Up))
+        if (key_is_pressed(XK_KP_8))
             move_mouse(display, 0, -MOVE);
-        if (key_is_pressed(XK_Left))
+        if (key_is_pressed(XK_KP_4))
             move_mouse(display, -MOVE, 0);
-        if (key_is_pressed(XK_Down))
+        if (key_is_pressed(XK_KP_5))
             move_mouse(display, 0, MOVE);
-        if (key_is_pressed(XK_Right))
+        if (key_is_pressed(XK_KP_6))
             move_mouse(display, MOVE, 0);
 
         /*if (key_is_pressed(SCROLL_UP)) {*/
