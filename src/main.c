@@ -62,42 +62,37 @@ void control_c_handler(int s) {
     exit(1);
 }
 
+int key_is_pressed(KeySym ks) {
+    char keys_return[32];
+    XQueryKeymap(display, keys_return);
+    KeyCode kc2 = XKeysymToKeycode(display, ks);
+    return !!(keys_return[kc2 >> 3] & (1 << (kc2 & 7)));
+}
+
 int main() {
 
     signal(SIGINT, control_c_handler);
 
-    const char R_CHAR = REVERSE_BITS(0x10); // 3
     int left = 0;
-    const char F_CHAR = REVERSE_BITS(0x40); // 5
     int right = 0;
-    const char C_CHAR = REVERSE_BITS(0x02); // 6
     int was_c = 0;
-    const char V_CHAR = REVERSE_BITS(0x01); // 6
     int was_v = 0;
-
-    const char RSHIFT = REVERSE_BITS(0x02); // 7
-    const char RCTRL = REVERSE_BITS(0x40); //13
-
-    const char UP = REVERSE_BITS(0x01); // 13
-    const char LEFT = REVERSE_BITS(0x40); // 14
-    const char DOWN = REVERSE_BITS(0x08); // 14
-    const char RIGHT = REVERSE_BITS(0x20); // 14
 
     display = XOpenDisplay(NULL);
     char keys_return[32];
 
     while (1) {
         XQueryKeymap(display, keys_return);
-        if ((keys_return[13] & UP) == UP)
+        if (key_is_pressed(XK_Up))
             move_mouse(display, 0, -MOVE);
-        if ((keys_return[14] & LEFT) == LEFT)
+        if (key_is_pressed(XK_Left))
             move_mouse(display, -MOVE, 0);
-        if ((keys_return[14] & DOWN) == DOWN)
+        if (key_is_pressed(XK_Down))
             move_mouse(display, 0, MOVE);
-        if ((keys_return[14] & RIGHT) == RIGHT)
+        if (key_is_pressed(XK_Right))
             move_mouse(display, MOVE, 0);
 
-        if ((keys_return[6] & C_CHAR) == C_CHAR) {
+        if (key_is_pressed(XK_C)) {
             if (!was_c) {
                 was_c = 1;
                 do_btn(display, Button4);
@@ -106,7 +101,7 @@ int main() {
             was_c = 0;
             undo_btn(display, Button4);
         }
-        if ((keys_return[6] & V_CHAR) == V_CHAR) {
+        if (key_is_pressed(XK_V)) {
             if (!was_v) {
                 was_v = 1;
                 do_btn(display, Button5);
@@ -116,11 +111,11 @@ int main() {
             undo_btn(display, Button5);
         }
 
-        if ((keys_return[5] & F_CHAR) == F_CHAR)
+        if (key_is_pressed(XK_F))
             right = 1;
         else
             right = 0;
-        if ((keys_return[3] & R_CHAR) == R_CHAR)
+        if (key_is_pressed(XK_R))
             left = 1;
         else
             left = 0;
