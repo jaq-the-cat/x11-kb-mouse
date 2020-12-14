@@ -2,15 +2,9 @@
 #include <stdio.h>
 #include <signal.h>
 #include "x.h"
+#include "conf.h"
 
 #include <unistd.h>
-
-#define POINTER_SPEED 3
-
-#define LEFT_CLICK XK_KP_7
-#define RIGHT_CLICK XK_KP_9
-#define SCROLL_UP XK_KP_1
-#define SCROLL_DOWN XK_KP_3
 
 Display *display;
 
