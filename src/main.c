@@ -80,8 +80,8 @@ int main() {
 
     int left = 0;
     int right = 0;
-    int was_scroll_up = 0;
-    int was_scroll_down = 0;
+    /*int was_scroll_up = 0;*/
+    /*int was_scroll_down = 0;*/
 
     const int LEFT_CLICK = XK_Q;
     const int RIGHT_CLICK = XK_E;
