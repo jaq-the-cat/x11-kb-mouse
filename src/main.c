@@ -84,6 +84,18 @@ int main(){
             move_mouse(display, 0, MOVE);
         if ((keys_return[14] & RIGHT) == RIGHT)
             move_mouse(display, MOVE, 0);
+
+        if ((keys_return[6] & C_CHAR) == C_CHAR) {
+            do_btn(display, Button4);
+            usleep(1);
+            undo_btn(display, Button4);
+        }
+        if ((keys_return[6] & V_CHAR) == C_CHAR) {
+            do_btn(display, Button5);
+            usleep(1);
+            undo_btn(display, Button5);
+        }
+
         if ((keys_return[5] & F_CHAR) == F_CHAR)
             right = 1;
         else
