@@ -85,8 +85,8 @@ int main() {
 
     const int LEFT_CLICK = XK_Q;
     const int RIGHT_CLICK = XK_E;
-    const int SCROLL_UP = XK_C;
-    const int SCROLL_DOWN = XK_F;
+    /*const int SCROLL_UP = XK_C;*/
+    /*const int SCROLL_DOWN = XK_F;*/
 
     display = XOpenDisplay(NULL);
     char keys_return[32];
