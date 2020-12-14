@@ -75,8 +75,8 @@ int main() {
 
     int left = 0;
     int right = 0;
-    int was_c = 0;
-    int was_v = 0;
+    int was_scroll_up = 0;
+    int was_scroll_down = 0;
 
     display = XOpenDisplay(NULL);
     char keys_return[32];
@@ -93,21 +93,21 @@ int main() {
             move_mouse(display, MOVE, 0);
 
         if (key_is_pressed(XK_C)) {
-            if (!was_c) {
-                was_c = 1;
+            if (!was_scroll_up) {
+                was_scroll_up = 1;
                 do_btn(display, Button4);
             }
         } else {
-            was_c = 0;
+            was_scroll_up = 0;
             undo_btn(display, Button4);
         }
         if (key_is_pressed(XK_V)) {
-            if (!was_v) {
-                was_v = 1;
+            if (!was_scroll_down) {
+                was_scroll_down = 1;
                 do_btn(display, Button5);
             }
         } else {
-            was_v = 0;
+            was_scroll_down = 0;
             undo_btn(display, Button5);
         }
 
