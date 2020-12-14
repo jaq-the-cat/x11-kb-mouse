@@ -20,9 +20,7 @@ void undo_btn(Display *display, int button) {
     XFlush(display);
 }
 
-int key_is_pressed(KeySym ks) {
-    char keys_return[32];
-    XQueryKeymap(display, keys_return);
+int key_is_pressed(KeySym ks, char keys_return[32]) {
     KeyCode kc2 = XKeysymToKeycode(display, ks);
     return !!(keys_return[kc2 >> 3] & (1 << (kc2 & 7)));
 }

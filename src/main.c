@@ -11,7 +11,7 @@ Display *display;
 
 void control_c_handler(int s) {
     XCloseDisplay(display);
-    exit(1);
+    exit(0);
 }
 
 int main() {
@@ -29,19 +29,18 @@ int main() {
 
     display = XOpenDisplay(NULL);
     char keys_return[32];
-
     while (1) {
         XQueryKeymap(display, keys_return);
-        if (key_is_pressed(XK_KP_8))
+        if (key_is_pressed(XK_KP_8, keys_return))
             move_mouse(display, 0, -POINTER_SPEED);
-        if (key_is_pressed(XK_KP_4))
+        if (key_is_pressed(XK_KP_4, keys_return))
             move_mouse(display, -POINTER_SPEED, 0);
-        if (key_is_pressed(XK_KP_5))
+        if (key_is_pressed(XK_KP_5, keys_return))
             move_mouse(display, 0, POINTER_SPEED);
-        if (key_is_pressed(XK_KP_6))
+        if (key_is_pressed(XK_KP_6, keys_return))
             move_mouse(display, POINTER_SPEED, 0);
 
-        if (key_is_pressed(SCROLL_UP)) {
+        if (key_is_pressed(SCROLL_UP, keys_return)) {
             if (!was_scroll_up) {
                 was_scroll_up = 1;
                 do_btn(display, Button4);
@@ -50,7 +49,7 @@ int main() {
             was_scroll_up = 0;
             undo_btn(display, Button4);
         }
-        if (key_is_pressed(SCROLL_DOWN)) {
+        if (key_is_pressed(SCROLL_DOWN, keys_return)) {
             if (!was_scroll_down) {
                 was_scroll_down = 1;
                 do_btn(display, Button5);
@@ -60,11 +59,11 @@ int main() {
             undo_btn(display, Button5);
         }
 
-        if (key_is_pressed(LEFT_CLICK))
+        if (key_is_pressed(LEFT_CLICK, keys_return))
             left = 1;
         else
             left = 0;
-        if (key_is_pressed(RIGHT_CLICK))
+        if (key_is_pressed(RIGHT_CLICK, keys_return))
             right = 1;
         else
             right = 0;
@@ -79,7 +78,6 @@ int main() {
             undo_btn(display, Button3);
         usleep(5000);
     }
-    end:
-    return 0;
+    return 0; // unreachable but eh
 }
 

@@ -8,4 +8,4 @@ void move_mouse(Display*, int, int);
 void set_mouse(Display*, int, int);
 void do_btn(Display*, int);
 void undo_btn(Display*, int);
-int key_is_pressed(KeySym);
+int key_is_pressed(KeySym, char[32]);
